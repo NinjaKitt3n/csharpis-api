@@ -1,0 +1,9 @@
+# Editor files
+.vscode
+
+# Build files
+obj/
+bin/
+
+# Configuration files
+appsettings*.json
