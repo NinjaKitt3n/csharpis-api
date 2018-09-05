@@ -18,7 +18,7 @@ namespace CSharpIs.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Project>>> Get(string query = null, int page = 0, int count = 50)
+        public async Task<IActionResult> Get(string query = null, int page = 0, int count = 50)
         {
             var projects = await _projectService.GetProjectsForSearch(query, page, count);
 
