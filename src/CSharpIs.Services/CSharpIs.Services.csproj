@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSharpIs.Domain.DAL\CSharpIs.Domain.DAL.csproj" />
+    <ProjectReference Include="..\CSharpIs.Domain.Data\CSharpIs.Domain.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using CSharpIs.Api.Models;
-using CSharpIs.Api.Services;
+using CSharpIs.Domain.Data.Model;
+using CSharpIs.Services.Projects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CSharpIs.Api.Controllers
@@ -11,23 +10,19 @@ namespace CSharpIs.Api.Controllers
     [ApiController]
     public class SearchController : ControllerBase
     {
-        private readonly ISearchService _searchService;
+        private readonly IProjectService _projectService;
 
-        public SearchController(
-            ISearchService searchService)
+        public SearchController(IProjectService projectService)
         {
-            _searchService = searchService;
+            _projectService = projectService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<SearchResult<Project>>> Get(
-            [Required]string query, int page = 0, int count = 50)
+        public async Task<ActionResult<List<Project>>> Get(string query = null, int page = 0, int count = 50)
         {
-            if (!ModelState.IsValid)
-                return ValidationProblem();
+            var projects = await _projectService.GetProjectsForSearch(query, page, count);
 
-            return Ok(await _searchService
-                .SearchProjectsAsync(query, page, count));
+            return Ok(projects);
         }
     }
 }

@@ -5,11 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Scrutor" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSharpIs.Domain.DAL\CSharpIs.Domain.DAL.csproj" />
+    <ProjectReference Include="..\CSharpIs.Domain.Data\CSharpIs.Domain.Data.csproj" />
+    <ProjectReference Include="..\CSharpIs.Services\CSharpIs.Services.csproj" />
   </ItemGroup>
 
 </Project>
