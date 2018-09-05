@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using CSharpIs.Domain.Data.Model;
 using CSharpIs.Services.Projects;
 using Microsoft.AspNetCore.Mvc;
 

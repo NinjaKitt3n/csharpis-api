@@ -1,5 +1,4 @@
-﻿using System;
-using CSharpIs.Domain.Data.Model;
+﻿using CSharpIs.Domain.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace CSharpIs.Domain.DAL
