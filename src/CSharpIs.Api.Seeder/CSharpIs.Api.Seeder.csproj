@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSharpIs.Domain.DAL\CSharpIs.Domain.DAL.csproj" />
+    <ProjectReference Include="..\CSharpIs.Domain.Data\CSharpIs.Domain.Data.csproj" />
+    <ProjectReference Include="..\CSharpIs.Services\CSharpIs.Services.csproj" />
+  </ItemGroup>
+
+</Project>

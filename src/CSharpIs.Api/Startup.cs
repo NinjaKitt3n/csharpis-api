@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using CSharpIs.Api.Services;
+using System.Reflection;
+using CSharpIs.Domain.DAL;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace CSharpIs.Api
 {
@@ -21,20 +20,25 @@ namespace CSharpIs.Api
             Configuration = configuration;
         }
 
+        [UsedImplicitly]
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
             services
-
-                .AddScoped<ISearchService, DefaultSearchService>()
-
                 .AddMvc()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var assemblies = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory, "CSharpIs.*.dll", SearchOption.AllDirectories)
+                .Select(Assembly.LoadFrom);
+
+            services.Scan(x => x.FromAssemblies(assemblies).AddClasses().AsImplementedInterfaces());
+
+            services.AddDbContext<EntityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CSharpIs")));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        [UsedImplicitly]
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
