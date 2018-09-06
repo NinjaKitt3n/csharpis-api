@@ -30,6 +30,8 @@ namespace CSharpIs.Api
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddCors();
+
             var assemblies = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory, "CSharpIs.*.dll", SearchOption.AllDirectories)
                 .Select(Assembly.LoadFrom);
 
@@ -49,6 +51,14 @@ namespace CSharpIs.Api
             {
                 app.UseHsts();
             }
+
+            app.UseCors(builder => builder
+                .WithOrigins("http://localhost:4200", "https://csharp.is")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+            );
+
 
             app.UseHttpsRedirection();
             app.UseMvc();
