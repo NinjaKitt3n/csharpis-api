@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CSharpIs.Api
 {
@@ -31,6 +32,15 @@ namespace CSharpIs.Api
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddCors();
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "CSharp.Is API", 
+                    Version = "v1"
+                });
+            });
 
             var assemblies = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory, "CSharpIs.*.dll", SearchOption.AllDirectories)
                 .Select(Assembly.LoadFrom);
@@ -59,7 +69,13 @@ namespace CSharpIs.Api
                 .AllowCredentials()
             );
 
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CSharp.Is API V1");
+                c.RoutePrefix = string.Empty;
+            });
+            
             app.UseHttpsRedirection();
             app.UseMvc();
         }
