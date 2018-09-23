@@ -12,7 +12,7 @@ namespace CSharpIs.Api.Seeder
         static void Main(string[] args)
         {
             var options = new DbContextOptionsBuilder()
-                .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=CSharpIs-API;Trusted_Connection=True;MultipleActiveResultSets=true");
+                .UseSqlServer("Server=SQL6006.site4now.net;Initial Catalog=DB_A4071A_csharpis;User Id=DB_A4071A_csharpis_admin;Password=mhs6QbkGvEBHLT;");
 
             using (var context = new EntityContext(options.Options))
             {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CSharpIs.Api.Controllers
 {
-    [Route("api/search")]
+    [Route("search")]
     [ApiController]
     public class SearchController : ControllerBase
     {
