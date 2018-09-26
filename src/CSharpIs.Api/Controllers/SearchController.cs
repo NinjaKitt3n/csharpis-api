@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSharpIs.Services.Projects;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace CSharpIs.Api.Controllers
         }
 
         [HttpGet]
+        [Produces("application/json", Type = typeof(IEnumerable<ProjectDto>))]
         public async Task<IActionResult> Get(string query = null, int page = 0, int count = 50)
         {
             var projects = await _projectService.GetProjectsForSearch(query, page, count);

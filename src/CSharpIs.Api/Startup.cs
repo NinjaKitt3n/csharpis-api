@@ -38,7 +38,11 @@ namespace CSharpIs.Api
                 c.SwaggerDoc("v1", new Info
                 {
                     Title = "CSharp.Is API", 
-                    Version = "v1"
+                    Version = "v1",
+                    Description = "",
+                    Contact = new Contact { Name = "Inzanit", Url = "http://aka.ms/csharp-discord" },
+                    TermsOfService = "None",
+                    License = new License { Name = "MIT", Url = "https://github.com/csharp-is/csharpis-api/blob/master/LICENSE" }
                 });
             });
 
